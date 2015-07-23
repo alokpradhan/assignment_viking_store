@@ -42,7 +42,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
-  gem 'pry-byebug'
+  gem 'pry'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
