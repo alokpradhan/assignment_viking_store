@@ -6,5 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-users = User.create([{name: 'Garrett', email: 'garrett@gmail.com'}])
-Address.create(street:'212 Sutter', city: 'SF')
+users = User.create([{name: Faker::Name.name, email: Faker::Internet.email}])
+Address.create(street:Faker::Address.street_name, city: Faker::Address.city)
