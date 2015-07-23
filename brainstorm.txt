@@ -1,60 +1,79 @@
 DATA MODEL
 
-
-
 1. USER
    - ID
    - email
    - name
+   - primary_cc = BILLING INFO_ID   #primary cc gives us default billing address
+   - primay_address = ADDRESS_ID
 
-  -> if using order
-   - phone_number
-   - shiping_address => default
-   - billing_adress  => default
-   - credit_card_info
-
-  1.5 ADDRESS
+  1.1 ADDRESS
       - ID
       - Street
       - CITY
       - State
       - Zipcode
 
-  1.6 USER-ADDRESS JOIN
+  1.2 BILLING INFO
       - ID
-      - USERID
+      - USER_ID
+      - phone_number
+      - cc_type
+      - cc_number
+      - cc_expiry
       - ADDRESS_ID
+      => A user can have multiple credit cards ONE(user)-TO-MANY(payment options)
+      => A credit card will have one billing address ONE(card)-to-ONE(address)
 
-NOTE: Customer can save multiple addresses
-      But only one can be default address 
+  1.3 USER-ADDRESS JOIN
+      - USER_ID
+      - ADDRESS_ID
+      => A user can have many addresses, an address can have many users MANY-
 
-2. Product
+2. PRODUCT
    - ID
    - Title
    - Description
    - Price
    - SKU number
-   - Category_id - FOREIGN KEY
-   => Each product has one category - ONE-TO-MANY
+   - Category_ID - FOREIGN KEY
+   => Each product has one category - ONE(category)-TO-MANY(products)
+   => Each product has many carts (one per user) - MANY(carts)-TO-MANY(products)
 
-3. Category
+3. CATEGORY
     - ID
     - description
-    => each category has many products
+    => Each category has many products
 
 4. CART
    - ID
    - quantity
    - USER_ID
-   => cart belongs to user - ONE-TO-ONE
+   => Each cart belongs to user - ONE(cart)-TO-ONE(user)
+   => Each cart has many products - MANY(cart)-TO-MANY(products)
 
-5. ORDER
+5. CART-PRODUCT JOIN
+    - CART_ID
+    - PRODUCT_ID
+
+6. ORDER
    - ID
    - CART_ID
-   -
+   - BILLING_ID (to ensure the order has been processed)
+   - SHIPPING_ADDRESS
+   => Each order has one cart - ONE(order)-TO-ONE(cart)
+
+TIPS:
+a. We need a ruby object to match every table we have, so a join table needs to be a model
 
 
+------
 
+  1.2 SHIPPING ADDRESS   #don't need shipping address
+      - ID
+      - USER_ID
+      - ADDRESS_ID
+      => A user can have many shipping addresses, a shipping address belongs to a user - ONE(user)-TO-MANY(addresses)
 
 
 
