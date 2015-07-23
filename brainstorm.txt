@@ -1,0 +1,60 @@
+DATA MODEL
+
+
+
+1. USER
+   - ID
+   - email
+   - name
+
+  -> if using order
+   - phone_number
+   - shiping_address => default
+   - billing_adress  => default
+   - credit_card_info
+
+  1.5 ADDRESS
+      - ID
+      - Street
+      - CITY
+      - State
+      - Zipcode
+
+  1.6 USER-ADDRESS JOIN
+      - ID
+      - USERID
+      - ADDRESS_ID
+
+NOTE: Customer can save multiple addresses
+      But only one can be default address 
+
+2. Product
+   - ID
+   - Title
+   - Description
+   - Price
+   - SKU number
+   - Category_id - FOREIGN KEY
+   => Each product has one category - ONE-TO-MANY
+
+3. Category
+    - ID
+    - description
+    => each category has many products
+
+4. CART
+   - ID
+   - quantity
+   - USER_ID
+   => cart belongs to user - ONE-TO-ONE
+
+5. ORDER
+   - ID
+   - CART_ID
+   -
+
+
+
+
+
+
